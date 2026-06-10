@@ -55,6 +55,18 @@ class Settings(BaseSettings):
     contact_receiver_email: str = "kanyabysoumya@gmail.com"
 
     frontend_origin: str = "http://localhost:3000"
+    allowed_origins: str = (
+        "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,"  # local dev
+        "http://127.0.0.1:8000,https://soumyasreemahi.vercel.app"
+    )
+
+    @computed_field
+    @property
+    def cors_allow_origins(self) -> list[str]:
+        origins = [origin.strip() for origin in self.allowed_origins.split(",") if origin.strip()]
+        if self.frontend_origin and self.frontend_origin not in origins:
+            origins.append(self.frontend_origin)
+        return origins
 
     # Default admin bootstrap credentials for create_admin.py
     admin_default_username: str = "sowmyakka_admin"
