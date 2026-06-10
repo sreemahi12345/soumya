@@ -27,6 +27,7 @@ app.add_middleware(
         "http://127.0.0.1:8000",
         "http://localhost",
         "http://127.0.0.1",
+        "https://soumya-two.vercel.app",
         settings.frontend_origin,
     ],
     allow_credentials=True,
